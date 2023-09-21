@@ -1,32 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Inventory : MonoBehaviour
 {
-    private List<IPickable> items = new List<IPickable>();
-    public KeyCode pickupKey = KeyCode.E; // Key to pick up items
+    public static event Action<List<InventoryItem>> OnInventoryChange;
+ public List<InventoryItem> inventory = new List<InventoryItem>();
+ private Dictionary<ItemData, InventoryItem> ItemDictionary = new Dictionary<ItemData, InventoryItem>();
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(pickupKey))
-        {
-            TryPickupItem();
-        }
-    }
-
-    private void TryPickupItem()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit))
-        {
-            IPickable pickable = hit.collider.GetComponent<IPickable>();
-            if (pickable != null)
-            {
-                items.Add(pickable);
-                pickable.OnPickup();
-                Debug.Log("Added to inventory: " + pickable.ItemName);
-            }
-        }
-    }
+private void OnEnable()
+{
+    Meat.OnMeatCollected += Add;
 }
+private void OnDisable()
+{
+    Meat.OnMeatCollected -= Add;
+}
+public void Add(ItemData itemData)
+{
+    if (ItemDictionary.TryGetValue(itemData, out InventoryItem item))
+    {
+        item.addToStack();
+        OnInventoryChange?.Invoke(inventory);
+    }
+    else 
+    {
+        InventoryItem newItem = new InventoryItem(itemData);
+        inventory.Add(newItem);
+        ItemDictionary.Add(itemData, newItem);
+        OnInventoryChange?.Invoke(inventory);
+    }
+   
+}
+ public void Remove(ItemData itemData)
+ {
+  if (ItemDictionary.TryGetValue(itemData, out InventoryItem item))
+    {
+        item.RemoveFromStack();
+        if(item.stackSize == 0)
+        {
+            inventory.Remove(item);
+            ItemDictionary.Remove(itemData);
+
+        }
+        OnInventoryChange?.Invoke(inventory);
+    }
+ }
+}
+
