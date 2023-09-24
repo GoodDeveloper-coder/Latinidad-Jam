@@ -5,8 +5,10 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
-    public float friction = 10.0f; 
+    //public float friction = 10.0f; 
+    public Animator anim;
     private Rigidbody2D rb;
+    public Vector2 direction;
 
     private Vector2 currentVelocity;
 
@@ -17,14 +19,17 @@ public class playerMovement : MonoBehaviour
 
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.y = Input.GetAxisRaw("Vertical");
 
-        Vector2 inputVector = new Vector2(horizontalInput, verticalInput).normalized;
+        anim.SetFloat("Horizontal", direction.x);
+        anim.SetFloat("Vertical", direction.y);
+        anim.SetFloat("Speed", direction.sqrMagnitude);
+    }
 
-        currentVelocity = Vector2.Lerp(currentVelocity, inputVector * moveSpeed, Time.deltaTime * friction);
-
-        rb.velocity = currentVelocity;
+    void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
     }
 }
 

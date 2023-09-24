@@ -9,6 +9,10 @@ public class ChefManCookingScript : MonoBehaviour
 
     public Animator anim;
 
+    public GameObject[] Foods;
+
+    public GameObject SpawnFoodPlace;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +32,8 @@ public class ChefManCookingScript : MonoBehaviour
         {
             anim.SetBool("Cook", true);
             yield return new WaitForSeconds(10.0f);
-            Food1.SetActive(true);
+            Instantiate(Foods[Random.Range(0, Foods.Length)], SpawnFoodPlace.transform.position, Quaternion.identity);
+            //Food1.SetActive(true);
             CanCook = false;
             anim.SetBool("Cook", false);
         }
