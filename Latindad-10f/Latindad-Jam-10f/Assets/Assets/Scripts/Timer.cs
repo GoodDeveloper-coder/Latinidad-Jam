@@ -22,9 +22,14 @@ public class Timer : MonoBehaviour
         int seconds = Mathf.FloorToInt(remainingTime % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        if (seconds > 10)
+        if (seconds > 30)
         {
-            Debug.Log("10 seconds");
+            Debug.Log("1 Day");
+            if (seconds > 60)
+            {
+                Debug.Log("2 Day");
+            }
         }
+        
     }
 }

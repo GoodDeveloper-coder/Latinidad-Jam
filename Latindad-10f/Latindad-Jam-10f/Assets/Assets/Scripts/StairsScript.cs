@@ -30,7 +30,7 @@ public class StairsScript : MonoBehaviour
     {
         if (other.gameObject.name == "Player")
         {
-            PlayerMovementScript.moveSpeed = 5.0f;
+            PlayerMovementScript.moveSpeed = 10.0f;
         }
     }
 }
