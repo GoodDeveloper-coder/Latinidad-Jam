@@ -20,15 +20,11 @@ public class Timer : MonoBehaviour
         remainingTime += Time.deltaTime;
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = string.Format("Gameplay time: {0:00}:{1:00}", minutes, seconds);
 
         if (seconds > 30)
         {
-            Debug.Log("1 Day");
-            if (seconds > 60)
-            {
-                Debug.Log("2 Day");
-            }
+
         }
         
     }

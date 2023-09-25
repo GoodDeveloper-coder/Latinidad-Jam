@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,6 +13,8 @@ public class PutFoodOnTableScript : MonoBehaviour
     public GlobalValues GB;
 
     private bool CanPutFood = true;
+
+    public PickUpFoodScript PFS;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +39,16 @@ public class PutFoodOnTableScript : MonoBehaviour
                 other.transform.position = FoodPutPosition.transform.position;
                 GB.Money += 200;
                 MoneyText.text = string.Format("Money: {0}", GB.Money);
-                CanPutFood = true;
+                StartCoroutine(CanPutFoodWaitTime());
+                PFS.CanPickUp = true;
+                CanPutFood = false;
             }
         }
+    }
+
+    IEnumerator CanPutFoodWaitTime()
+    {
+        yield return new WaitForSeconds(20.0f);
+        CanPutFood = true;
     }
 }

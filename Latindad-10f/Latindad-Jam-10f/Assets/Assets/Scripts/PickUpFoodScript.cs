@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickUpFoodScript : MonoBehaviour
 {
     //public GameObject food;
-    private bool CanPickUp;
+    public bool CanPickUp = true;
 
     public ChefManCookingScript ChefManScript;
 
@@ -25,14 +25,13 @@ public class PickUpFoodScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Food")
         {
-            //if (Input.GetKeyDown(KeyCode.E))
-           // {
-            other.transform.parent = transform;
-            ChefManScript.CanCook = true;
-            other.transform.position = this.transform.position;
-            //}
-            CanPickUp = true;
-            Debug.Log("CanPickUp");
+            if (CanPickUp) {
+                other.transform.parent = transform;
+                ChefManScript.CanCook = true;
+                other.transform.position = this.transform.position;
+                Debug.Log("CanPickUp");
+                CanPickUp = false;
+            }
         }
     }
 
@@ -44,7 +43,7 @@ public class PickUpFoodScript : MonoBehaviour
             Debug.Log("Can'tPickUp");
         }
     }
-
+    /*
     void PickUp()
     {
         if (CanPickUp)
@@ -54,4 +53,5 @@ public class PickUpFoodScript : MonoBehaviour
             ChefManScript.CanCook = true;
         }
     }
+    */
 }
