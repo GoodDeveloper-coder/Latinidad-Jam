@@ -37,7 +37,7 @@ public class PutFoodOnTableScript : MonoBehaviour
                 other.GetComponent<Collider2D>().enabled = false;
                 other.transform.parent = transform;
                 other.transform.position = FoodPutPosition.transform.position;
-                GB.Money += 200;
+                GB.Money += 10;
                 MoneyText.text = string.Format("Money: {0}", GB.Money);
                 StartCoroutine(CanPutFoodWaitTime());
                 PFS.CanPickUp = true;
