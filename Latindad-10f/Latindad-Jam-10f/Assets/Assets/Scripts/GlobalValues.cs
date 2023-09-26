@@ -7,6 +7,8 @@ public class GlobalValues : MonoBehaviour
 
     public float Money;
 
+    public float FoodPrice = 10f;
+
     // Start is called before the first frame update
     void Start()
     {

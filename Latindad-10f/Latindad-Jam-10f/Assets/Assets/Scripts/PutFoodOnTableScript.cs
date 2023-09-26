@@ -16,6 +16,9 @@ public class PutFoodOnTableScript : MonoBehaviour
 
     public PickUpFoodScript PFS;
 
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +28,7 @@ public class PutFoodOnTableScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        MoneyText.text = string.Format("Money: {0}", GB.Money);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -37,7 +40,7 @@ public class PutFoodOnTableScript : MonoBehaviour
                 other.GetComponent<Collider2D>().enabled = false;
                 other.transform.parent = transform;
                 other.transform.position = FoodPutPosition.transform.position;
-                GB.Money += 10;
+                GB.Money += GB.FoodPrice;
                 MoneyText.text = string.Format("Money: {0}", GB.Money);
                 StartCoroutine(CanPutFoodWaitTime());
                 PFS.CanPickUp = true;

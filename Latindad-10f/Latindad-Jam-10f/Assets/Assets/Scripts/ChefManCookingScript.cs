@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChefManCookingScript : MonoBehaviour
 {
@@ -13,18 +14,21 @@ public class ChefManCookingScript : MonoBehaviour
 
     public GameObject SpawnFoodPlace;
 
-    public float FoodCookingTime;
+    public float FoodCookingTime = 15f;
+
+    public Scrollbar scrollbar;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(CookingTime());
+        StartCoroutine(ScrollbarTime());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     IEnumerator CookingTime()
@@ -39,9 +43,24 @@ public class ChefManCookingScript : MonoBehaviour
             CanCook = false;
             anim.SetBool("Cook", false);
         }
-        
 
         yield return new WaitForSeconds(2.0f);
         StartCoroutine(CookingTime());
+    }
+
+    IEnumerator ScrollbarTime()
+    {
+        if (CanCook)
+        {
+            yield return new WaitForSeconds(FoodCookingTime / 10);
+            scrollbar.size += 0.1f;
+        }
+        else if (!CanCook)
+        {
+            scrollbar.size = 0f;
+        }
+
+        yield return new WaitForSeconds(0.001f);
+        StartCoroutine(ScrollbarTime());
     }
 }
