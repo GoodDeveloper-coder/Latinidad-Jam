@@ -9,6 +9,8 @@ public class PickUpFoodScript : MonoBehaviour
 
     public ChefManCookingScript ChefManScript;
 
+    public GlobalValues GlobalValues;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,15 @@ public class PickUpFoodScript : MonoBehaviour
                 Debug.Log("CanPickUp");
                 CanPickUp = false;
             }
+        }
+
+        if (other.gameObject.tag == "People")
+        {
+            GlobalValues.EnterInPeopleZone = true;
+        }
+        else
+        {
+            GlobalValues.EnterInPeopleZone = false;
         }
     }
 

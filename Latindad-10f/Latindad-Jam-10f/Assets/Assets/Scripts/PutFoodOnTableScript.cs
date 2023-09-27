@@ -10,7 +10,7 @@ public class PutFoodOnTableScript : MonoBehaviour
     public GameObject FoodPutPosition;
 
     [SerializeField] private TextMeshProUGUI MoneyText;
-    public GlobalValues GB;
+    public GlobalValues GlobalValues;
 
     private bool CanPutFood = true;
 
@@ -28,20 +28,20 @@ public class PutFoodOnTableScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoneyText.text = string.Format("Money: {0}", GB.Money);
+        MoneyText.text = string.Format("Money: {0}", GlobalValues.Money);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Food")
         {
-            if (CanPutFood)
+            if (CanPutFood && GlobalValues.EnterInPeopleZone)
             {
                 other.GetComponent<Collider2D>().enabled = false;
                 other.transform.parent = transform;
                 other.transform.position = FoodPutPosition.transform.position;
-                GB.Money += GB.FoodPrice;
-                MoneyText.text = string.Format("Money: {0}", GB.Money);
+                GlobalValues.Money += GlobalValues.FoodPrice;
+                MoneyText.text = string.Format("Money: {0}", GlobalValues.Money);
                 StartCoroutine(CanPutFoodWaitTime());
                 PFS.CanPickUp = true;
                 CanPutFood = false;

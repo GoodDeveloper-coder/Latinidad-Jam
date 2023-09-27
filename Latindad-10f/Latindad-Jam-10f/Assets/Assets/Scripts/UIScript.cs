@@ -12,6 +12,8 @@ public class UIScript : MonoBehaviour
 
     public playerMovement PlayerMovementScript;
 
+    public GameObject StartFate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,4 +52,10 @@ public class UIScript : MonoBehaviour
             GB.FoodPrice += GB.FoodPrice / 20;
         }  
     }
+
+    public void StartFateIn()
+    {
+        StartFate.SetActive(false);
+    }
+
 }

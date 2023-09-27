@@ -8,10 +8,18 @@ public class SpawnPeople : MonoBehaviour
     public GameObject[] People;
     public GameObject[] PeopleSpawnPosition;
 
+    private GameObject SpawnedPeople;
+
+    public GameObject TablesLocation;
+
+    private int PeoplesRandomSpawnPos;
+
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(People[Random.Range(0, People.Length)], PeopleSpawnPosition[Random.Range(0, PeopleSpawnPosition.Length)].transform.position, Quaternion.identity);
+        PeoplesRandomSpawnPos = Random.Range(0, PeopleSpawnPosition.Length);
+        SpawnedPeople = Instantiate(People[Random.Range(0, People.Length)], PeopleSpawnPosition[PeoplesRandomSpawnPos].transform.position, Quaternion.identity);
+        SpawnedPeople.transform.parent = PeopleSpawnPosition[PeoplesRandomSpawnPos].transform;
         StartCoroutine(PeopleSpawnTimer());
     }
 
@@ -24,9 +32,10 @@ public class SpawnPeople : MonoBehaviour
     IEnumerator PeopleSpawnTimer()
     {
 
-
+        PeoplesRandomSpawnPos = Random.Range(0, PeopleSpawnPosition.Length);
         yield return new WaitForSeconds(20.0f);
-        Instantiate(People[Random.Range(0, People.Length)], PeopleSpawnPosition[Random.Range(0, PeopleSpawnPosition.Length)].transform.position, Quaternion.identity);
+        SpawnedPeople = Instantiate(People[Random.Range(0, People.Length)], PeopleSpawnPosition[PeoplesRandomSpawnPos].transform.position, Quaternion.identity);
+        SpawnedPeople.transform.parent = PeopleSpawnPosition[PeoplesRandomSpawnPos].transform;
         StartCoroutine(PeopleSpawnTimer());
     }
 }
