@@ -14,6 +14,8 @@ public class SpawnPeople : MonoBehaviour
 
     private int PeoplesRandomSpawnPos;
 
+    public float PeopleSpawnTime = 25f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +35,7 @@ public class SpawnPeople : MonoBehaviour
     {
 
         PeoplesRandomSpawnPos = Random.Range(0, PeopleSpawnPosition.Length);
-        yield return new WaitForSeconds(20.0f);
+        yield return new WaitForSeconds(PeopleSpawnTime);
         SpawnedPeople = Instantiate(People[Random.Range(0, People.Length)], PeopleSpawnPosition[PeoplesRandomSpawnPos].transform.position, Quaternion.identity);
         SpawnedPeople.transform.parent = PeopleSpawnPosition[PeoplesRandomSpawnPos].transform;
         StartCoroutine(PeopleSpawnTimer());
