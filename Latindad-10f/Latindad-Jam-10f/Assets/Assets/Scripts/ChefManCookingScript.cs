@@ -18,6 +18,8 @@ public class ChefManCookingScript : MonoBehaviour
 
     public Scrollbar scrollbar;
 
+    public AudioSource FoodCookedSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,7 @@ public class ChefManCookingScript : MonoBehaviour
         {
             anim.SetBool("Cook", true);
             yield return new WaitForSeconds(FoodCookingTime);
+            FoodCookedSound.Play();
             Instantiate(Foods[Random.Range(0, Foods.Length)], SpawnFoodPlace.transform.position, Quaternion.identity);
             //Food1.SetActive(true);
             CanCook = false;

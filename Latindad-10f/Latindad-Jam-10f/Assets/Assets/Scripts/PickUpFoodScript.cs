@@ -11,6 +11,8 @@ public class PickUpFoodScript : MonoBehaviour
 
     public GlobalValues GlobalValues;
 
+    public AudioSource PickUpFoodSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class PickUpFoodScript : MonoBehaviour
         if (other.gameObject.tag == "Food")
         {
             if (CanPickUp) {
+                PickUpFoodSound.Play();
                 other.transform.parent = transform;
                 ChefManScript.CanCook = true;
                 other.transform.position = this.transform.position;

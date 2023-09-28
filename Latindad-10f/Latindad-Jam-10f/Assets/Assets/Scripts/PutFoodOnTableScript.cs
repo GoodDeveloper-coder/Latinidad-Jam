@@ -16,7 +16,11 @@ public class PutFoodOnTableScript : MonoBehaviour
 
     public PickUpFoodScript PFS;
 
+    public AudioSource PutFoodOnTableSound;
 
+    public AudioSource GotMoneySound;
+
+    private GameObject FoodTransformLocation;
 
 
     // Start is called before the first frame update
@@ -28,7 +32,7 @@ public class PutFoodOnTableScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoneyText.text = string.Format("Money: {0}", GlobalValues.Money);
+        MoneyText.text = string.Format("Money: {0}", GlobalValues.Money);     
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -37,10 +41,15 @@ public class PutFoodOnTableScript : MonoBehaviour
         {
             if (CanPutFood && GlobalValues.EnterInPeopleZone)
             {
+                FoodTransformLocation = GameObject.FindGameObjectWithTag("People");
+                //FoodTransformLocation = GameObject.FindGameObjectWithTag("People");
+                PutFoodOnTableSound.Play();
                 other.GetComponent<Collider2D>().enabled = false;
-                other.transform.parent = transform;
+                other.transform.parent = FoodTransformLocation.transform;
+                //other.transform.parent = transform;
                 other.transform.position = FoodPutPosition.transform.position;
                 GlobalValues.Money += GlobalValues.FoodPrice;
+                GotMoneySound.Play();
                 MoneyText.text = string.Format("Money: {0}", GlobalValues.Money);
                 StartCoroutine(CanPutFoodWaitTime());
                 PFS.CanPickUp = true;
@@ -51,7 +60,8 @@ public class PutFoodOnTableScript : MonoBehaviour
 
     IEnumerator CanPutFoodWaitTime()
     {
-        yield return new WaitForSeconds(20.0f);
+        yield return new WaitForSeconds(3.0f);
+        Destroy(FoodTransformLocation);
         CanPutFood = true;
     }
 }
