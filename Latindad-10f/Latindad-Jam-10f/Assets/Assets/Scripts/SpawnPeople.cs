@@ -14,7 +14,7 @@ public class SpawnPeople : MonoBehaviour
 
     private int PeoplesRandomSpawnPos;
 
-    public float PeopleSpawnTime = 25f;
+    public float PeopleSpawnTime = 5f;
 
     // Start is called before the first frame update
     void Start()

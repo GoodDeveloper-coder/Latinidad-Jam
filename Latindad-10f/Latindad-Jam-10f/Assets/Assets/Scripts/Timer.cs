@@ -9,8 +9,8 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI NumberOfDayDayText;
     [SerializeField] float remainingTime;
 
-    private int NumberOfDay;
-    private int DayNumber = 600;
+    public int NumberOfDay;
+    private int DayDurationSec = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +26,16 @@ public class Timer : MonoBehaviour
         int seconds = Mathf.FloorToInt(remainingTime % 60);
         timerText.text = string.Format("{0:00}:{1:00} : Gameplay time", minutes, seconds);
 
-        if (seconds > DayNumber)
+        if (seconds > DayDurationSec && NumberOfDay <= 19)
         {
             NumberOfDay += 1;
             NumberOfDayDayText.text = string.Format("Day: {0}", NumberOfDay);
             Debug.Log($"Day:{NumberOfDay}");
-            DayNumber += 600;
+            DayDurationSec += 2;
+        }
+        else
+        {
+            NumberOfDayDayText.text = string.Format("Day: {0}", NumberOfDay);
         }
         
     }

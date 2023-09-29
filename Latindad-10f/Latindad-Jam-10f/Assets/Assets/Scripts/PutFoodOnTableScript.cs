@@ -22,6 +22,9 @@ public class PutFoodOnTableScript : MonoBehaviour
 
     private GameObject FoodTransformLocation;
 
+    private Transform FoodTransformLocationn;
+
+    public int ChildFoodNumberInList = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -41,11 +44,12 @@ public class PutFoodOnTableScript : MonoBehaviour
         {
             if (CanPutFood && GlobalValues.EnterInPeopleZone)
             {
-                FoodTransformLocation = GameObject.FindGameObjectWithTag("People");
+                FoodTransformLocationn = this.gameObject.transform.GetChild(4).GetChild(0);
+               // (ChildFoodNumberInList);
                 //FoodTransformLocation = GameObject.FindGameObjectWithTag("People");
                 PutFoodOnTableSound.Play();
                 other.GetComponent<Collider2D>().enabled = false;
-                other.transform.parent = FoodTransformLocation.transform;
+                other.transform.parent = FoodTransformLocationn.transform;
                 //other.transform.parent = transform;
                 other.transform.position = FoodPutPosition.transform.position;
                 GlobalValues.Money += GlobalValues.FoodPrice;
@@ -61,6 +65,7 @@ public class PutFoodOnTableScript : MonoBehaviour
     IEnumerator CanPutFoodWaitTime()
     {
         yield return new WaitForSeconds(2.0f);
+        FoodTransformLocation = FoodTransformLocationn.gameObject;
         Destroy(FoodTransformLocation);
         CanPutFood = true;
     }

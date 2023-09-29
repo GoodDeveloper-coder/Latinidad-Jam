@@ -53,9 +53,9 @@ public class UIScript : MonoBehaviour
     {
         if (GB.Money >= UpgradePlayerSpeedPrice)
         {
-            UpgradePlayerSpeedPrice += UpgradePlayerSpeedPrice / 4;
-           //UpgradePlayerSpeedText.text = string.Format("Cost: {0}", UpgradePlayerSpeedPrice);
             GB.Money -= UpgradePlayerSpeedPrice;
+           //UpgradePlayerSpeedText.text = string.Format("Cost: {0}", UpgradePlayerSpeedPrice);
+            UpgradePlayerSpeedPrice += UpgradePlayerSpeedPrice / 4;
             PlayerMovementScript.moveSpeed += PlayerMovementScript.moveSpeed / 20;
         }
     }
@@ -64,9 +64,9 @@ public class UIScript : MonoBehaviour
     {
         if (GB.Money >= UpgradeCookingTimePrice)
         {
+           GB.Money -= UpgradeCookingTimePrice;
+            //UpgradeCookingTimeText.text = string.Format("Cost: {0}", UpgradeCookingTimePrice);
             UpgradeCookingTimePrice += UpgradeCookingTimePrice / 4;
-           //UpgradeCookingTimeText.text = string.Format("Cost: {0}", UpgradeCookingTimePrice);
-            GB.Money -= UpgradeCookingTimePrice;
             CHMCS.FoodCookingTime -= CHMCS.FoodCookingTime / 20;
         }
     }
@@ -75,9 +75,9 @@ public class UIScript : MonoBehaviour
     {
         if (GB.Money >= UpgradeSellingfoodPrice)
         {
-            UpgradeSellingfoodPrice += UpgradeSellingfoodPrice / 4;
-            //UpgradeSellingfoodText.text = string.Format("Cost: {0}", UpgradeSellingfoodPrice);
             GB.Money -= UpgradeSellingfoodPrice;
+            //UpgradeSellingfoodText.text = string.Format("Cost: {0}", UpgradeSellingfoodPrice);
+            UpgradeSellingfoodPrice += UpgradeSellingfoodPrice / 4;
             GB.FoodPrice += GB.FoodPrice / 20;
         }  
     }
@@ -86,9 +86,9 @@ public class UIScript : MonoBehaviour
     {
         if (GB.Money >= UpgradePeopleComeTimePrice)
         {
-            UpgradePeopleComeTimePrice += UpgradePeopleComeTimePrice / 5;
+            GB.Money -= UpgradePeopleComeTimePrice;
             //UpgradePeopleStaingInCafeText.text = string.Format("Cost: {0}", UpgradePeopleStaingInCafePrice);
-            GB.Money -= UpgradeSellingfoodPrice;
+            UpgradePeopleComeTimePrice += UpgradePeopleComeTimePrice / 5;
             SpawnPeopleScript.PeopleSpawnTime -= SpawnPeopleScript.PeopleSpawnTime / 45;
         }
     }
