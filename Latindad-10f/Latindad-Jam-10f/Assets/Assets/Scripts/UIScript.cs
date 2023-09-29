@@ -33,6 +33,14 @@ public class UIScript : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI UpgradePeopleStaingInCafeText;
 
+    [SerializeField] private TextMeshProUGUI UpgradePeopleStaingInCafeTextInformation;
+
+    [SerializeField] private TextMeshProUGUI UpgradeCookingTimeTextInformation;
+
+    [SerializeField] private TextMeshProUGUI UpgradeSellingfoodTextInformation;
+
+    [SerializeField] private TextMeshProUGUI PlayerSpeedTextInformation;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +55,11 @@ public class UIScript : MonoBehaviour
         UpgradeCookingTimeText.text = string.Format("Cost: {0}", UpgradeCookingTimePrice);
         UpgradeSellingfoodText.text = string.Format("Cost: {0}", UpgradeSellingfoodPrice);
         UpgradePeopleStaingInCafeText.text = string.Format("Cost: {0}", UpgradePeopleComeTimePrice);
+
+        UpgradePeopleStaingInCafeTextInformation.text = string.Format("People Come Time: {0} sec", SpawnPeopleScript.PeopleSpawnTime);
+        UpgradeCookingTimeTextInformation.text = string.Format("Cooking Time: {0} sec", CHMCS.FoodCookingTime);
+        UpgradeSellingfoodTextInformation.text = string.Format("Every Sell Cost:  {0}", GB.FoodPrice);
+        PlayerSpeedTextInformation.text = string.Format("Player Speed: {0}", PlayerMovementScript.moveSpeed);
     }
 
     public void UpgradePlayerSpeed()
